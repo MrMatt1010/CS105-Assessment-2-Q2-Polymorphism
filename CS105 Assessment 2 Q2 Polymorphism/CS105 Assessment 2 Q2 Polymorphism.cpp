@@ -37,9 +37,25 @@ class computerGame : public videoGame
 private:
     std::string operatingSystem;
 public:
-//Here is the constructor for the computer system.
+//Here is the constructor for the computer system, Function calling the display method of the parent class
+
+    consoleGame(std::string t, float p, std::string c) : videoGame(t, p), consoleType(c) {};
+    void display() {
+        videoGame::display();
+        std::cout << "Console Type: " << consoleType << std::endl;
+    }
 };
 
+//This functin displays the list of computer games once it has been created
+
+void displayVideoGames(videoGame* videoGamesList, int size) {
+    std::cout << "Video Games List" << std::endl;
+    for (int i = 0; i < size; i++) {
+        std::cout << "*********************************" << std::endl;
+        videoGamesList[i].display(); //Display function is called
+        std::cout << "\n*******************************" << std::endl;
+    }
+}
 int main()
 {
     std::cout << "Hello World!\n";
