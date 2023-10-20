@@ -85,7 +85,15 @@ int main()
         else if (videoGameType == 'o') {
             std::string osType;
             std::cout << "Please enter the title of the computer game: ";
+            getline(std::cin >> ws, gameTitle);
+            std::cout << "Please enter the price: ";
+            std::cin >> price;
+            std::cout << "Please enter the operating system (OS): " << std::endl;
+            getline(std::cin >> ws, osType);
+            computerGame newComputerGame(gameTitle, price, osType);
+            videoGames[currentSize++] = newComputerGame;
         }
+
     }
 }
 
