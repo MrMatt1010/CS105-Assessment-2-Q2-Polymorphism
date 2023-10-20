@@ -93,7 +93,15 @@ int main()
             computerGame newComputerGame(gameTitle, price, osType);
             videoGames[currentSize++] = newComputerGame;
         }
+        else
+        {
+            std::cout << "Please enter a valid choice";
+        }
+    std::cout << "Do you want to add another game?: ";
+    std::cin >> userChoice;
+    } while (userChoice == 'y' || userChoice == 'y');
 
-    }
+    std::cout << std::endl;
+    displayVideoGames(videoGames, currentSize);
 }
 
