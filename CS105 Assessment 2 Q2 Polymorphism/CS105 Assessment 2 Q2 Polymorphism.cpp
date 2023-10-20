@@ -58,6 +58,34 @@ void displayVideoGames(videoGame* videoGamesList, int size) {
 }
 int main()
 {
-    std::cout << "Hello World!\n";
+    videoGame* videoGames = new videoGame[MAX_SIZE];
+    int currentSize = 0;
+
+    char userChoice;
+
+    do {
+        char videoGameType;
+        std::string gameTitle;
+        float price;
+
+        std::cout << "Do you want to enter data for a computer game or a console game (o / c): ";
+        std::cin >> videoGameType;
+        if (videoGameType == 'c') {
+            std::string consoleType;
+            std::cout << "Please enter the title of the console game: ";
+            getline(std::cin >> ws, gameTitle);
+            std::cout << "Please enter the price: ";
+            std::cin >> price;
+            std::cout << "Please enter the console type: ";
+            getline::(std::cin >> ws, consoleType);
+            consoleGame newConsoleGame(gameTitle, price, consoleType);
+            //Adding the console to the video game list
+            videoGames[currentSize++] = newConsoleGame;
+        }
+        else if (videoGameType == 'o') {
+            std::string osType;
+            std::cout << "Please enter the title of the computer game: ";
+        }
+    }
 }
 
