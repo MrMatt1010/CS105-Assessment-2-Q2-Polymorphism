@@ -15,7 +15,29 @@ protected:
     float price;       //Stores the price of the game
 
 public:
+// Default constructor and array building to store objects entered IE: games and prices
 
+    videoGame() : title(""), price(0) {};
+    videoGame(std::string t, float p) : title(t), price(0) {};
+
+// Virtual display method which can be overidden by the dreived classes
+
+    void display() {
+        std::cout << fixed << setPrecision(2);
+    std::cout << "Title: " << title << std::endl;
+    std::cout << "Price: " << price << std::endl;
+    }
+
+};
+
+// This is the computerGame Class
+
+class computerGame : public videoGame
+{
+private:
+    std::string operatingSystem;
+public:
+//Here is the constructor for the computer system.
 };
 
 int main()
