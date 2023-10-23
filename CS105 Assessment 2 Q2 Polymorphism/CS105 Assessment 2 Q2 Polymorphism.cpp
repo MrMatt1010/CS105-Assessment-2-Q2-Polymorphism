@@ -24,8 +24,8 @@ public:
 
     void display() {
         std::cout << fixed << setPrecision(2);
-    std::cout << "Title: " << title << std::endl;
-    std::cout << "Price: " << price << std::endl;
+        std::cout << "Title: " << title << std::endl;
+        std::cout << "Price: " << price << std::endl;
     }
 
 };
@@ -73,11 +73,11 @@ int main()
         if (videoGameType == 'c') {
             std::string consoleType;
             std::cout << "Please enter the title of the console game: ";
-            getline(std::cin >> ws, gameTitle);
+            (std::cin >> ws, gameTitle);
             std::cout << "Please enter the price: ";
             std::cin >> price;
             std::cout << "Please enter the console type: ";
-            getline::(std::cin >> ws, consoleType);
+            (std::cin >> ws, consoleType);
             consoleGame newConsoleGame(gameTitle, price, consoleType);
             //Adding the console to the video game list
             videoGames[currentSize++] = newConsoleGame;
@@ -85,11 +85,11 @@ int main()
         else if (videoGameType == 'o') {
             std::string osType;
             std::cout << "Please enter the title of the computer game: ";
-            getline(std::cin >> ws, gameTitle);
+            (std::cin >> ws, gameTitle);
             std::cout << "Please enter the price: ";
             std::cin >> price;
             std::cout << "Please enter the operating system (OS): " << std::endl;
-            getline(std::cin >> ws, osType);
+            (std::cin >> ws, osType);
             computerGame newComputerGame(gameTitle, price, osType);
             videoGames[currentSize++] = newComputerGame;
         }
