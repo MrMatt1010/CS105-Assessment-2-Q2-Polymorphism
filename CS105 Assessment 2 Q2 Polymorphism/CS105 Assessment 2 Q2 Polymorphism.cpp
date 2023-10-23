@@ -37,6 +37,8 @@ class computerGame : public videoGame
 private:
     std::string operatingSystem;
 public:
+    std::string consoleType; 
+    
 //Here is the constructor for the computer system, Function calling the display method of the parent class
 
     consoleGame(std::string t, float p, std::string c) : videoGame(t, p), consoleType(c) {};
@@ -73,11 +75,11 @@ int main()
         if (videoGameType == 'c') {
             std::string consoleType;
             std::cout << "Please enter the title of the console game: ";
-            (std::cin >> ws, gameTitle);
+            (std::cin >> gameTitle);
             std::cout << "Please enter the price: ";
             std::cin >> price;
             std::cout << "Please enter the console type: ";
-            (std::cin >> ws, consoleType);
+            (std::cin >> consoleType);
             consoleGame newConsoleGame(gameTitle, price, consoleType);
             //Adding the console to the video game list
             videoGames[currentSize++] = newConsoleGame;
@@ -85,11 +87,11 @@ int main()
         else if (videoGameType == 'o') {
             std::string osType;
             std::cout << "Please enter the title of the computer game: ";
-            (std::cin >> ws, gameTitle);
+            (std::cin >>  gameTitle);
             std::cout << "Please enter the price: ";
             std::cin >> price;
             std::cout << "Please enter the operating system (OS): " << std::endl;
-            (std::cin >> ws, osType);
+            (std::cin >>  osType);
             computerGame newComputerGame(gameTitle, price, osType);
             videoGames[currentSize++] = newComputerGame;
         }
@@ -99,9 +101,15 @@ int main()
         }
     std::cout << "Do you want to add another game?: ";
     std::cin >> userChoice;
-    } while (userChoice == 'y' || userChoice == 'y');
+    } while (userChoice == 'y' || userChoice == 'Y');
 
     std::cout << std::endl;
     displayVideoGames(videoGames, currentSize);
+
+    // Free the memory for the dynamically allocated objects
+    for (int i = 0; i < currentSize; i++) {
+        delete videoGames[i];
+    }
+    delete[] videoGames;
 }
 
