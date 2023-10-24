@@ -1,5 +1,6 @@
 // CS105 Assessment 2 Q2 Polymorphism
 // Student Name: Matt Taylor
+//This program allows the store manager to input computer and console games with prices to an array
 
 
 #include <iostream>
@@ -23,7 +24,7 @@ public:
 // Virtual display method which can be overidden by the dreived classes
 
     void display() {
-        std::cout << fixed << setPrecision(2);
+        //std::cout << fixed << setPrecision(2);
         std::cout << "Title: " << title << std::endl;
         std::cout << "Price: " << price << std::endl;
     }
@@ -37,30 +38,47 @@ class computerGame : public videoGame
 private:
     std::string operatingSystem;
 public:
-    std::string consoleType; 
-    
+
 //Here is the constructor for the computer system, Function calling the display method of the parent class
 
+    computerGame(std::string t, float p, std::string o) : videoGame(t, p), operatingSystem(o) {};
+    void display()
+    {
+        // calling the display method of the parent class
+        videoGame::display();
+        std::cout << "OS Type: " << operatingSystem << std::endl;
+    }
+};
+
+// ConsoleGame class deriving from the videogame class
+class consoleGame : public videoGame
+{
+private:
+    std::string consoleType;
+public:
+    // constructor for the computer system
     consoleGame(std::string t, float p, std::string c) : videoGame(t, p), consoleType(c) {};
-    void display() {
+    void display()
+    {
+        // calling the display method of the parent class
         videoGame::display();
         std::cout << "Console Type: " << consoleType << std::endl;
     }
 };
-
 //This functin displays the list of computer games once it has been created
 
-void displayVideoGames(videoGame* videoGamesList, int size) {
+void displayVideoGames(videoGame** videoGamesList, int size) {
     std::cout << "Video Games List" << std::endl;
     for (int i = 0; i < size; i++) {
         std::cout << "*********************************" << std::endl;
-        videoGamesList[i].display(); //Display function is called
+        videoGamesList[i]->display(); // Use -> to access the display function
         std::cout << "\n*******************************" << std::endl;
     }
 }
+
 int main()
 {
-    videoGame* videoGames = new videoGame[MAX_SIZE];
+    videoGame* videoGames[MAX_SIZE]; // Declare videoGames in the main function
     int currentSize = 0;
 
     char userChoice;
@@ -70,18 +88,20 @@ int main()
         std::string gameTitle;
         float price;
 
-        std::cout << "Do you want to enter data for a computer game or a console game (o / c): ";
+        std::cout << "Do you want to enter data for a Computer Game or a Console Game (o / c) : ";
         std::cin >> videoGameType;
-        if (videoGameType == 'c') {
+        if (videoGameType == 'c')
+        {
             std::string consoleType;
-            std::cout << "Please enter the title of the console game: ";
+            std::cout << "Please enter the title of console game: ";
+            
             (std::cin >> gameTitle);
             std::cout << "Please enter the price: ";
             std::cin >> price;
-            std::cout << "Please enter the console type: ";
+            std::cout << "Please enter console type: ";
+           
             (std::cin >> consoleType);
-            consoleGame newConsoleGame(gameTitle, price, consoleType);
-            //Adding the console to the video game list
+            consoleGame* newConsoleGame = new consoleGame(gameTitle, price, consoleType);
             videoGames[currentSize++] = newConsoleGame;
         }
         else if (videoGameType == 'o') {
@@ -92,8 +112,8 @@ int main()
             std::cin >> price;
             std::cout << "Please enter the operating system (OS): " << std::endl;
             (std::cin >>  osType);
-            computerGame newComputerGame(gameTitle, price, osType);
-            videoGames[currentSize++] = newComputerGame;
+            computerGame* newComputerGame = new computerGame(gameTitle, price, osType);
+            videoGames[currentSize++] = newComputerGame; videoGames[currentSize++] = newComputerGame;
         }
         else
         {
@@ -106,10 +126,13 @@ int main()
     std::cout << std::endl;
     displayVideoGames(videoGames, currentSize);
 
-    // Free the memory for the dynamically allocated objects
+    // Free the dynamically allocated memory
     for (int i = 0; i < currentSize; i++) {
         delete videoGames[i];
     }
-    delete[] videoGames;
+
+    
+
+    
 }
 
