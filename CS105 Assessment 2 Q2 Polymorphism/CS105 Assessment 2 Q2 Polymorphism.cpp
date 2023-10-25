@@ -18,11 +18,14 @@ protected:
 public:
     videoGame() : title(""), price(0) {};
     videoGame(std::string t, float p) : title(t), price(p) {};
-    //In here is the default constructor to store objects entered
-    void display() {
+    
+    virtual void display() {
         std::cout << "Title: " << title << std::endl;
         std::cout << "Price: " << std::fixed << std::setprecision(2) << price << std::endl;
+        displayDetails(); // Call the virtual displayDetails() method
     }
+
+    virtual void displayDetails() {} // Virtual method for displaying details
 };
 
 //computerGame class 
@@ -33,8 +36,7 @@ private:
 public:
     computerGame(std::string t, float p, std::string o) : videoGame(t, p), operatingSystem(o) {}
 
-    void display() {
-        videoGame::display();
+    void displayDetails() override {
         std::cout << "OS Type: " << operatingSystem << std::endl;
     }
 };
@@ -47,8 +49,7 @@ private:
 public:
     consoleGame(std::string t, float p, std::string c) : videoGame(t, p), consoleType(c) {}
 
-    void display() {
-        videoGame::display();
+    void displayDetails() override {
         std::cout << "Console Type: " << consoleType << std::endl;
     }
 };
