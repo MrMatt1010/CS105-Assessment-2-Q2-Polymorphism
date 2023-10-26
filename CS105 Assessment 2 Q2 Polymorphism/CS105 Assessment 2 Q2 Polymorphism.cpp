@@ -28,7 +28,7 @@ public:
     virtual void displayDetails() {} // Virtual method for displaying details
 };
 
-//computerGame class 
+//computerGame  child class 
 class computerGame : public videoGame {
 private:
     std::string operatingSystem;
@@ -41,7 +41,7 @@ public:
     }
 };
 
-//consoleGame class
+//consoleGame child class
 class consoleGame : public videoGame {
 private:
     std::string consoleType;
@@ -54,6 +54,7 @@ public:
     }
 };
 
+//Displays list of computer games after the user has entered all they want to
 void displayVideoGames(videoGame** videoGamesList, int size) {
     std::cout << "Video Games List" << std::endl;
     for (int i = 0; i < size; i++) {
@@ -68,7 +69,7 @@ int main() {
     int currentSize = 0;
 
     char userChoice;
-
+//Do while loop that allows the user to input games, prices as well as OS and Console type
     do {
         char videoGameType;
         std::string gameTitle;
@@ -114,7 +115,7 @@ int main() {
     displayVideoGames(videoGames, currentSize);
 
     for (int i = 0; i < currentSize; i++) {
-        delete videoGames[i];
+        delete videoGames[i]; //Frees up memory 
     }
 }
 
