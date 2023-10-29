@@ -115,7 +115,7 @@ int main() {
     displayVideoGames(videoGames, currentSize);
 
     for (int i = 0; i < currentSize; i++) {
-        delete videoGames[i]; //Frees up memory 
+        delete videoGames[i]; //Frees up memory once it's not needed
     }
 }
 
